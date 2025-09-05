@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Rails API Lab Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 20px; }
+    h1 { margin-bottom: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 16px; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; }
+    label { display:block; font-size: 12px; color:#555; margin-top:8px }
+    input, select, textarea { width: 100%; max-width: 100%; padding: 6px 8px; border:1px solid #ccc; border-radius:6px; }
+    button { margin-top: 10px; padding: 8px 10px; border: none; background: #0d6efd; color: white; border-radius: 6px; cursor: pointer; }
+    button.secondary { background:#6c757d }
+    pre { background:#0b1021; color:#e6e6e6; padding:12px; border-radius:8px; overflow:auto; max-height:220px; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .row { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+    .row input { flex: 1 1 140px; min-width: 140px; }
+    .row button { flex: 0 0 auto; }
+  </style>
+  <script>
+    const base = location.origin;
+    async function call(method, path, body, outId){
+      const opts = { method, headers: { 'Content-Type': 'application/json' } };
+      if(body) opts.body = JSON.stringify(body);
+      try{
+        const r = await fetch(base+path, opts);
+        const t = await r.text();
+        document.getElementById(outId).textContent = `${r.status} ${r.statusText}\n` + (t||'');
+      }catch(e){
+        document.getElementById(outId).textContent = 'ERROR: '+ e.message;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>API Verification</h1>
+  <p>Quick manual checks for endpoints from the lab.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Jobs — list/filter</h3>
+      <label>Name</label>
+      <input id="jobs_name" placeholder="Ruby"/>
+      <label>Place</label>
+      <input id="jobs_place" placeholder="Remote"/>
+      <button onclick="(() => { const n=document.getElementById('jobs_name').value; const p=document.getElementById('jobs_place').value; const q=new URLSearchParams(); if(n) q.set('name', n); if(p) q.set('place', p); call('GET', `/v1/jobs?${q.toString()}`, null, 'out_jobs') })()">GET /v1/jobs</button>
+      <pre id="out_jobs"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Jobs — by company</h3>
+      <label>Company ID</label>
+      <input id="jobs_company_id" placeholder="4"/>
+      <div class="row">
+        <button onclick="call('GET', `/v1/companies/${document.getElementById('jobs_company_id').value}/jobs`, null, 'out_jobs_company')">GET /v1/companies/:id/jobs</button>
+      </div>
+      <pre id="out_jobs_company"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Jobs — create/update/delete</h3>
+      <label>Company ID</label>
+      <input id="job_company_id" placeholder="4"/>
+      <label>Name</label>
+      <input id="job_name" placeholder="JS Angular"/>
+      <label>Place</label>
+      <input id="job_place" placeholder="Tomsk"/>
+      <div class="row">
+        <button onclick="call('POST', '/v1/jobs', {name: document.getElementById('job_name').value, place: document.getElementById('job_place').value, company_id: Number(document.getElementById('job_company_id').value)}, 'out_job_crud')">POST /v1/jobs</button>
+        <input id="job_id" placeholder="job id" style="width:100px"/>
+        <button class="secondary" onclick="call('PUT', `/v1/jobs/${document.getElementById('job_id').value}`, {name: document.getElementById('job_name').value, place: document.getElementById('job_place').value}, 'out_job_crud')">PUT /v1/jobs/:id</button>
+        <button class="secondary" onclick="call('DELETE', `/v1/jobs/${document.getElementById('job_id').value}`, null, 'out_job_crud')">DELETE /v1/jobs/:id</button>
+      </div>
+      <pre id="out_job_crud"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Companies — list/filter</h3>
+      <label>Name</label>
+      <input id="companies_name" placeholder="Acme"/>
+      <label>Location</label>
+      <input id="companies_location" placeholder="London"/>
+      <button onclick="(() => { const n=document.getElementById('companies_name').value; const l=document.getElementById('companies_location').value; const q=new URLSearchParams(); if(n) q.set('name', n); if(l) q.set('location', l); call('GET', `/v1/companies?${q.toString()}`, null, 'out_companies') })()">GET /v1/companies</button>
+      <pre id="out_companies"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Companies — create/update/soft delete</h3>
+      <label>Name</label>
+      <input id="company_name" placeholder="Malta"/>
+      <label>Location</label>
+      <input id="company_location" placeholder="Minsk"/>
+      <div class="row">
+        <button onclick="call('POST', '/v1/companies', {name: document.getElementById('company_name').value, location: document.getElementById('company_location').value}, 'out_company_crud')">POST /v1/companies</button>
+        <input id="company_id" placeholder="company id" style="width:120px"/>
+        <button class="secondary" onclick="call('PUT', `/v1/companies/${document.getElementById('company_id').value}`, {name: document.getElementById('company_name').value, location: document.getElementById('company_location').value}, 'out_company_crud')">PUT /v1/companies/:id</button>
+        <button class="secondary" onclick="call('PUT', `/v1/companies/${document.getElementById('company_id').value}/mark_deleted`, null, 'out_company_crud')">PUT /v1/companies/:id/mark_deleted</button>
+      </div>
+      <pre id="out_company_crud"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Geeks — list/filter + create/update</h3>
+      <label>Name</label>
+      <input id="geeks_name" placeholder="Ivan"/>
+      <label>Stack</label>
+      <input id="geeks_stack" placeholder="Rails"/>
+      <div class="row">
+        <button onclick="(() => { const n=document.getElementById('geeks_name').value; const s=document.getElementById('geeks_stack').value; const q=new URLSearchParams(); if(n) q.set('name', n); if(s) q.set('stack', s); call('GET', `/v1/geeks?${q.toString()}`, null, 'out_geeks') })()">GET /v1/geeks</button>
+      </div>
+      <label>New/Update</label>
+      <input id="geek_name" placeholder="Ivan"/>
+      <input id="geek_stack" placeholder="Rails"/>
+      <input id="geek_resume" placeholder="URL-or-text"/>
+      <div class="row">
+        <button onclick="call('POST', '/v1/geeks', {name: document.getElementById('geek_name').value, stack: document.getElementById('geek_stack').value, resume: document.getElementById('geek_resume').value}, 'out_geeks_crud')">POST /v1/geeks</button>
+        <input id="geek_id" placeholder="geek id" style="width:120px"/>
+        <button class="secondary" onclick="call('PUT', `/v1/geeks/${document.getElementById('geek_id').value}`, {name: document.getElementById('geek_name').value, stack: document.getElementById('geek_stack').value, resume: document.getElementById('geek_resume').value}, 'out_geeks_crud')">PUT /v1/geeks/:id</button>
+      </div>
+      <pre id="out_geeks"></pre>
+      <pre id="out_geeks_crud"></pre>
+    </div>
+
+    <div class="card">
+      <h3>Applies — filters + create/update/delete</h3>
+      <label>Filters: read/invited/job_id/geek_id/company_id</label>
+      <input id="appl_read" placeholder="true/false"/>
+      <input id="appl_invited" placeholder="true/false"/>
+      <input id="appl_job" placeholder="job_id"/>
+      <input id="appl_geek" placeholder="geek_id"/>
+      <input id="appl_company" placeholder="company_id"/>
+      <button onclick="(() => { const q=new URLSearchParams(); const r=document.getElementById('appl_read').value; const i=document.getElementById('appl_invited').value; const j=document.getElementById('appl_job').value; const g=document.getElementById('appl_geek').value; const c=document.getElementById('appl_company').value; if(r) q.set('read', r); if(i) q.set('invited', i); if(j) q.set('job_id', j); if(g) q.set('geek_id', g); if(c) q.set('company_id', c); call('GET', `/v1/applies?${q.toString()}`, null, 'out_applies') })()">GET /v1/applies</button>
+      <label>Create/Update/Delete</label>
+      <input id="apply_job" placeholder="job_id"/>
+      <input id="apply_geek" placeholder="geek_id"/>
+      <input id="apply_read" placeholder="true/false"/>
+      <input id="apply_invited" placeholder="true/false"/>
+      <div class="row">
+        <button onclick="call('POST', '/v1/applies', {job_id: Number(document.getElementById('apply_job').value), geek_id: Number(document.getElementById('apply_geek').value), read: document.getElementById('apply_read').value==='true', invited: document.getElementById('apply_invited').value==='true'}, 'out_applies_crud')">POST /v1/applies</button>
+        <input id="apply_id" placeholder="apply id" style="width:120px"/>
+        <button class="secondary" onclick="call('PUT', `/v1/applies/${document.getElementById('apply_id').value}`, {read: document.getElementById('apply_read').value==='true', invited: document.getElementById('apply_invited').value==='true'}, 'out_applies_crud')">PUT /v1/applies/:id</button>
+        <button class="secondary" onclick="call('DELETE', `/v1/applies/${document.getElementById('apply_id').value}`, null, 'out_applies_crud')">DELETE /v1/applies/:id</button>
+      </div>
+      <pre id="out_applies"></pre>
+      <pre id="out_applies_crud"></pre>
+    </div>
+  </div>
+
+  <p style="margin-top:24px; color:#666">Note: This page directly calls your API on the same origin.</p>
+</body>
+</html>
+
+
