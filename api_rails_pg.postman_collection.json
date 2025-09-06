@@ -1,0 +1,494 @@
+{
+	"info": {
+		"_postman_id": "d468be9d-9c96-46e8-b8aa-8987411da9ba",
+		"name": "api_rails_pg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32762076"
+	},
+	"item": [
+		{
+			"name": "Jobs — List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/jobs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs — List (filters)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/jobs?name=Ruby&place=Remote",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"jobs"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ruby"
+						},
+						{
+							"key": "place",
+							"value": "Remote"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs — Show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/jobs/5",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"jobs",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs — Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"JS Angular\",\"place\":\"Tomsk\",\"company_id\":4}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/jobs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs — Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Ruby Dev\",\"place\":\"Hybrid\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/jobs/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"jobs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs — By company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/companies/4/jobs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"companies",
+						"4",
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs — Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/jobs/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"jobs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Companies — List (filters)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/companies?name=Acme&location=London",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"companies"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Acme"
+						},
+						{
+							"key": "location",
+							"value": "London"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Companies — Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Malta\",\"location\":\"Minsk\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/companies",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Companies — Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"location\":\"Vilnius\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/companies/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"companies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Companies — Soft delete",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/companies/2/mark_deleted",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"companies",
+						"2",
+						"mark_deleted"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Companies — Show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/companies/4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"companies",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Geeks — List (filters)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/geeks?name=iv&stack=rails",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"geeks"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "iv"
+						},
+						{
+							"key": "stack",
+							"value": "rails"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Geeks — Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Ivan\",\"stack\":\"Rails\",\"resume\":\"URL-or-text\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/geeks",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"geeks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Geeks — Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"resume\":\"https://example.com/cv.pdf\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/geeks/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"geeks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Applies — List (filters)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/applies?read=true&invited=true&job_id=4&geek_id=2&company_id=4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"applies"
+					],
+					"query": [
+						{
+							"key": "read",
+							"value": "true"
+						},
+						{
+							"key": "invited",
+							"value": "true"
+						},
+						{
+							"key": "job_id",
+							"value": "4"
+						},
+						{
+							"key": "geek_id",
+							"value": "2"
+						},
+						{
+							"key": "company_id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Applies — Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"job_id\":4,\"geek_id\":2,\"read\":false,\"invited\":false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/applies",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"applies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Applies — Update (read/invited)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"read\":true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/applies/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"applies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Applies — Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/applies/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"applies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
