@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound do
-    render json: { error: 'No such record in Database; check params', status: :not_found }
+    render json: { error: 'No such record in Database; check params', status: :not_found }, status: :not_found
   end
 
   rescue_from ActiveRecord::InvalidForeignKey do
@@ -13,6 +13,6 @@ class ApplicationController < ActionController::API
 
   rescue_from ActionController::RoutingError do |exception|
     Rails.logger.error "Routing error occurred: #{exception}"
-    render json: { error: 'No route matches; check routes', status: :no_route }
+    render json: { error: 'No route matches; check routes', status: :no_route }, status: :not_found
   end
 end

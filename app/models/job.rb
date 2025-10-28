@@ -5,4 +5,8 @@ class Job < ApplicationRecord
   validates :name, presence: true
   validates :place, presence: true
   validates :company_id, presence: true
+
+  def delete_job
+    update(deleted: true)
+  end
 end

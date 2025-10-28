@@ -36,8 +36,9 @@ class Api::V1::AppliesController < ApplicationController
   end
 
   def destroy
+    deleted = { id: @apply.id, job_id: @apply.job_id, geek_id: @apply.geek_id }
     @apply.destroy
-    head :no_content
+    render json: { deleted_apply: deleted, code: 200, status: :success }
   end
 
   private

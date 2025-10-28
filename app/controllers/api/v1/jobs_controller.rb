@@ -3,9 +3,9 @@ class Api::V1::JobsController < ApplicationController
 
   def index
     if params[:company_id]
-      jobs = Company.find(params[:company_id]).jobs
+      jobs = Company.find(params[:company_id]).jobs.where(deleted: false)
     else
-      jobs = Job.all
+      jobs = Job.where(deleted: false)
       jobs = jobs.where("name ILIKE ?", "%#{params[:name]}%") if params[:name].present?
       jobs = jobs.where("place ILIKE ?", "%#{params[:place]}%") if params[:place].present?
     end
@@ -34,8 +34,8 @@ class Api::V1::JobsController < ApplicationController
   end
 
   def destroy
-    @job.destroy
-    head :no_content
+    @job.delete_job
+    render json: { deleted_job: @job, code: 200, status: :success }, except: [:created_at, :updated_at]
   end
 
   private

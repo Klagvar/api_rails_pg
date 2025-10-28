@@ -7,487 +7,158 @@
 	},
 	"item": [
 		{
-			"name": "Jobs — List",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/jobs",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"jobs"
-					]
-				}
-			},
+			"name": "01. Companies — List",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/companies","host":["{{baseUrl}}"],"path":["v1","companies"]}},
 			"response": []
 		},
 		{
-			"name": "Jobs — List (filters)",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/jobs?name=Ruby&place=Remote",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"jobs"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "Ruby"
-						},
-						{
-							"key": "place",
-							"value": "Remote"
-						}
-					]
-				}
-			},
+			"name": "02. Companies — Create",
+			"request": {"method":"POST","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"name\":\"Malta\",\"location\":\"Minsk\"}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/companies","host":["{{baseUrl}}"],"path":["v1","companies"]}},
 			"response": []
 		},
 		{
-			"name": "Jobs — Show",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/jobs/5",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"jobs",
-						"5"
-					]
-				}
-			},
+			"name": "03. Companies — Show (id:4)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/companies/4","host":["{{baseUrl}}"],"path":["v1","companies","4"]}},
 			"response": []
 		},
 		{
-			"name": "Jobs — Create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"JS Angular\",\"place\":\"Tomsk\",\"company_id\":4}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/jobs",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"jobs"
-					]
-				}
-			},
+			"name": "04. Companies — Update (id:2)",
+			"request": {"method":"PUT","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"location\":\"Vilnius\"}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/companies/2","host":["{{baseUrl}}"],"path":["v1","companies","2"]}},
 			"response": []
 		},
 		{
-			"name": "Jobs — Update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"Ruby Dev\",\"place\":\"Hybrid\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/jobs/1",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"jobs",
-						"1"
-					]
-				}
-			},
+			"name": "05. Companies — Soft delete (id:2)",
+			"request": {"method":"PUT","header":[],"url":{"raw":"{{baseUrl}}/v1/companies/2/mark_deleted","host":["{{baseUrl}}"],"path":["v1","companies","2","mark_deleted"]}},
 			"response": []
 		},
 		{
-			"name": "Jobs — By company",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/companies/4/jobs",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"companies",
-						"4",
-						"jobs"
-					]
-				}
-			},
+			"name": "06. Jobs — List",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/jobs","host":["{{baseUrl}}"],"path":["v1","jobs"]}},
 			"response": []
 		},
 		{
-			"name": "Jobs — Delete",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/jobs/1",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"jobs",
-						"1"
-					]
-				}
-			},
+			"name": "07. Jobs — List (filters)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/jobs?name=Ruby&place=Remote","host":["{{baseUrl}}"],"path":["v1","jobs"],"query":[{"key":"name","value":"Ruby"},{"key":"place","value":"Remote"}]}},
 			"response": []
 		},
 		{
-			"name": "Companies — List (filters)",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/companies?name=Acme&location=London",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"companies"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "Acme"
-						},
-						{
-							"key": "location",
-							"value": "London"
-						}
-					]
-				}
-			},
+			"name": "08. Jobs — By company (id:4)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/companies/4/jobs","host":["{{baseUrl}}"],"path":["v1","companies","4","jobs"]}},
 			"response": []
 		},
 		{
-			"name": "Companies — Create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"Malta\",\"location\":\"Minsk\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/companies",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"companies"
-					]
-				}
-			},
+			"name": "09. Jobs — Show (id:5)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/jobs/5","host":["{{baseUrl}}"],"path":["v1","jobs","5"]}},
 			"response": []
 		},
 		{
-			"name": "Companies — Update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"location\":\"Vilnius\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/companies/2",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"companies",
-						"2"
-					]
-				}
-			},
+			"name": "10. Jobs — Create",
+			"request": {"method":"POST","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"name\":\"JS Angular\",\"place\":\"Tomsk\",\"company_id\":4}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/jobs","host":["{{baseUrl}}"],"path":["v1","jobs"]}},
 			"response": []
 		},
 		{
-			"name": "Companies — Soft delete",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/companies/2/mark_deleted",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"companies",
-						"2",
-						"mark_deleted"
-					]
-				}
-			},
+			"name": "11. Jobs — Update (id:1)",
+			"request": {"method":"PUT","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"name\":\"Ruby Dev\",\"place\":\"Hybrid\"}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/jobs/1","host":["{{baseUrl}}"],"path":["v1","jobs","1"]}},
 			"response": []
 		},
 		{
-			"name": "Companies — Show",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/companies/4",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"companies",
-						"4"
-					]
-				}
-			},
+			"name": "12. Jobs — Delete (soft, id:1)",
+			"request": {"method":"DELETE","header":[],"url":{"raw":"{{baseUrl}}/v1/jobs/1","host":["{{baseUrl}}"],"path":["v1","jobs","1"]}},
 			"response": []
 		},
 		{
-			"name": "Geeks — List (filters)",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/geeks?name=iv&stack=rails",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"geeks"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "iv"
-						},
-						{
-							"key": "stack",
-							"value": "rails"
-						}
-					]
-				}
-			},
+			"name": "13. Geeks — List",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/geeks","host":["{{baseUrl}}"],"path":["v1","geeks"]}},
 			"response": []
 		},
 		{
-			"name": "Geeks — Create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"Ivan\",\"stack\":\"Rails\",\"resume\":\"URL-or-text\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/geeks",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"geeks"
-					]
-				}
-			},
+			"name": "14. Geeks — List (filters)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/geeks?name=iv&stack=rails","host":["{{baseUrl}}"],"path":["v1","geeks"],"query":[{"key":"name","value":"iv"},{"key":"stack","value":"rails"}]}},
 			"response": []
 		},
 		{
-			"name": "Geeks — Update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"resume\":\"https://example.com/cv.pdf\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/geeks/1",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"geeks",
-						"1"
-					]
-				}
-			},
+			"name": "15. Geeks — Create (becomes id:10)",
+			"request": {"method":"POST","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"name\":\"Ivan\",\"stack\":\"Rails\",\"resume\":\"URL-or-text\"}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/geeks","host":["{{baseUrl}}"],"path":["v1","geeks"]}},
 			"response": []
 		},
 		{
-			"name": "Applies — List (filters)",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/applies?read=true&invited=true&job_id=4&geek_id=2&company_id=4",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"applies"
-					],
-					"query": [
-						{
-							"key": "read",
-							"value": "true"
-						},
-						{
-							"key": "invited",
-							"value": "true"
-						},
-						{
-							"key": "job_id",
-							"value": "4"
-						},
-						{
-							"key": "geek_id",
-							"value": "2"
-						},
-						{
-							"key": "company_id",
-							"value": "4"
-						}
-					]
-				}
-			},
+			"name": "16. Geeks — Show (id:1)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/geeks/1","host":["{{baseUrl}}"],"path":["v1","geeks","1"]}},
 			"response": []
 		},
 		{
-			"name": "Applies — Create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"job_id\":4,\"geek_id\":2,\"read\":false,\"invited\":false}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/applies",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"applies"
-					]
-				}
-			},
+			"name": "17. Geeks — Update (id:1)",
+			"request": {"method":"PUT","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"resume\":\"https://example.com/cv.pdf\"}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/geeks/1","host":["{{baseUrl}}"],"path":["v1","geeks","1"]}},
 			"response": []
 		},
 		{
-			"name": "Applies — Update (read/invited)",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"read\":true}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/v1/applies/1",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"applies",
-						"1"
-					]
-				}
-			},
+			"name": "18. Geeks — Delete (id:10)",
+			"request": {"method":"DELETE","header":[],"url":{"raw":"{{baseUrl}}/v1/geeks/10","host":["{{baseUrl}}"],"path":["v1","geeks","10"]}},
 			"response": []
 		},
 		{
-			"name": "Applies — Delete",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/applies/1",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"applies",
-						"1"
-					]
-				}
-			},
+			"name": "19. Applies — List",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies","host":["{{baseUrl}}"],"path":["v1","applies"]}},
+			"response": []
+		},
+		{
+			"name": "20. Applies — List (filters)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?read=true&invited=true&job_id=4&geek_id=2&company_id=4","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"read","value":"true"},{"key":"invited","value":"true"},{"key":"job_id","value":"4"},{"key":"geek_id","value":"2"},{"key":"company_id","value":"4"}]}},
+			"response": []
+		},
+		{
+			"name": "21. Applies — For company (id:1)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?company_id=1","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"company_id","value":"1"}]}},
+			"response": []
+		},
+		{
+			"name": "22. Applies — For job (id:1)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?job_id=1","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"job_id","value":"1"}]}},
+			"response": []
+		},
+		{
+			"name": "23. Applies — For job in company (company:1, job:1)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?company_id=1&job_id=1","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"company_id","value":"1"},{"key":"job_id","value":"1"}]}},
+			"response": []
+		},
+		{
+			"name": "24. Applies — For geek (id:1)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?geek_id=1","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"geek_id","value":"1"}]}},
+			"response": []
+		},
+		{
+			"name": "25. Applies — For geek (read)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?geek_id=1&read=true","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"geek_id","value":"1"},{"key":"read","value":"true"}]}},
+			"response": []
+		},
+		{
+			"name": "26. Applies — For geek (invited)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies?geek_id=1&invited=true","host":["{{baseUrl}}"],"path":["v1","applies"],"query":[{"key":"geek_id","value":"1"},{"key":"invited","value":"true"}]}},
+			"response": []
+		},
+		{
+			"name": "27. Applies — Show (id:1)",
+			"request": {"method":"GET","header":[],"url":{"raw":"{{baseUrl}}/v1/applies/1","host":["{{baseUrl}}"],"path":["v1","applies","1"]}},
+			"response": []
+		},
+		{
+			"name": "28. Applies — Create",
+			"request": {"method":"POST","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"job_id\":4,\"geek_id\":2,\"read\":false,\"invited\":false}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/applies","host":["{{baseUrl}}"],"path":["v1","applies"]}},
+			"response": []
+		},
+		{
+			"name": "29. Applies — Update (id:1, read)",
+			"request": {"method":"PUT","header":[{"key":"Content-Type","value":"application/json","type":"text"}],"body":{"mode":"raw","raw":"{\"read\":true}","options":{"raw":{"language":"json"}}},"url":{"raw":"{{baseUrl}}/v1/applies/1","host":["{{baseUrl}}"],"path":["v1","applies","1"]}},
+			"response": []
+		},
+		{
+			"name": "30. Applies — Delete (id:1)",
+			"request": {"method":"DELETE","header":[],"url":{"raw":"{{baseUrl}}/v1/applies/1","host":["{{baseUrl}}"],"path":["v1","applies","1"]}},
+			"response": []
+		},
+		{
+			"name": "31. Companies — Delete (id:5)",
+			"request": {"method":"DELETE","header":[],"url":{"raw":"{{baseUrl}}/v1/companies/5","host":["{{baseUrl}}"],"path":["v1","companies","5"]}},
 			"response": []
 		}
 	]
