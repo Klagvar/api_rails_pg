@@ -46,5 +46,5 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "active_model_serializers", "~> 0.10.15"
+gem "active_model_serializers", "~> 0.10.16"
 gem "activerecord-reset-pk-sequence", "~> 0.2.1"
